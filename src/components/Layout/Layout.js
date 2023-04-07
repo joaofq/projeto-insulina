@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import styles from './layout.module.css';
-import homeStyles from '../../styles/Home.module.css';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Layout({ children, home }) {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -12,20 +14,41 @@ export default function Layout({ children, home }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <header className={styles.header}>
-        <h1 className={homeStyles.logo}>Projeto insulina</h1>
+        <Link href={`/`}>
+          <h1 className={styles.header__logo}>Projeto insulina</h1>
+        </Link>
         <navbar>
-          <ul>
-            <li className={homeStyles.listItem}>
-              <Link href={`/cadastro`}>Cadastro</Link>
+          <ul className={styles.navbar}>
+            <li className={styles.listItem}>
+              <Link
+                className={
+                  router.pathname == '/cadastro' ? styles.link__active : ''
+                }
+                href={`/cadastro`}
+              >
+                Cadastro
+              </Link>
             </li>
-            <li>
-              <Link href={`/login`}>Login</Link>
+            <li className={styles.listItem}>
+              <Link
+                href={`/login`}
+                className={
+                  router.pathname == '/login' ? styles.link__active : ''
+                }
+              >
+                Login
+              </Link>
             </li>
           </ul>
         </navbar>
       </header>
       <main>{children}</main>
-      <footer className={styles.footer}>Footer</footer>
+      <footer className={styles.footer}>
+        <p>
+          Este projeto foi desenvolvido por João Fernando Paulin Quattrucci para
+          fins de estudo utilizando as tecnologias React com NextJS.
+        </p>
+      </footer>
     </>
   );
 }
