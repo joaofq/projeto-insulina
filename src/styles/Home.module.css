@@ -1,8 +1,3 @@
-.logo {
-  color: white;
-  font-size: 2em;
-}
-
 .container__form {
   padding: 10px;
   margin: 50px auto;
@@ -13,4 +8,12 @@
   flex-direction: column;
   gap: 10px;
   align-items: center;
+}
+
+.intro {
+  padding: 4em;
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

@@ -9,7 +9,7 @@ export default function Cadastro() {
         <label>Nome</label>
         <input type="text" />
         <label>Data de nascimento</label>
-        <input type="number" />
+        <input type="date" />
         <label>Incremento insulina</label>
         <input type="number" />
         <label>E-mail</label>
