@@ -39,3 +39,20 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 Paleta:
 https://color.adobe.com/pt/search?q=health%20app
+
+Melhorias:
+
+Front:
+
+- API com backend
+- Página exibição de dados
+- Inputs
+- Design geral
+- Validação do formulário
+
+Backend:
+
+- Validações
+- JWToken
+- Bcrypt
+- Proteção
