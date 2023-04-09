@@ -5,16 +5,16 @@ GET http://localhost:8081/users
 GET http://localhost:8081/users/6430d27d3a9cee54f27108dd
 
 ###
-DELETE http://localhost:8081/users/6430d3ce666525288d20c51b
+DELETE http://localhost:8081/users/64320746d5d2451496709f66
 
 ###
-POST http://localhost:8081/users
+POST http://localhost:8081/users/
 Content-Type: application/json
 
 {
-"name" : "Maria",
+"name" : "Maria Tyson",
 "idade" : 34,
-"email" : "fafa43@ig.com.br",
+"email" : "tyss@ig.com.br",
 "password" : "fefefe33",
 "incremento" : "33"
 }

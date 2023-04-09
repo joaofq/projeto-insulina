@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 //getting all.
 router.get('/', async (req, res) => {
@@ -19,11 +20,12 @@ router.get('/:id', getUser, (req, res) => {
 
 //creating one
 router.post('/', async (req, res) => {
+  let hashedPassword = await bcrypt.hash(req.body.password, 10);
   const user = new User({
     name: req.body.name,
     idade: req.body.idade,
     email: req.body.email,
-    password: req.body.password,
+    password: hashedPassword,
     incremento: req.body.incremento,
   });
   try {
@@ -46,7 +48,8 @@ router.patch('/:id', getUser, async (req, res) => {
     res.user.email = req.body.email;
   }
   if (req.body.password != null) {
-    res.user.password = req.body.password;
+    let hashedPassword = await bcrypt.hash(req.body.password, 10);
+    res.user.password = hashedPassword;
   }
   if (req.body.incremento != null) {
     res.user.incremento = req.body.incremento;
@@ -67,20 +70,6 @@ router.delete('/:id', getUser, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-// async function getUser(req, res, next) {
-//   let user;
-//   try {
-//     user = await User.findById(req.params.id);
-//     if (user === null) {
-//       return res.status(404).json({ message: 'Usuário inexistente' });
-//     }
-//   } catch (err) {
-//     return res.status(500).json({ message: err.message });
-//   }
-//   res.user = user;
-//   next();
-// }
 
 async function getUser(req, res, next) {
   let user;
