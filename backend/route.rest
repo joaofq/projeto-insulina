@@ -5,17 +5,17 @@ GET http://localhost:8081/users
 GET http://localhost:8081/users/6430d27d3a9cee54f27108dd
 
 ###
-DELETE http://localhost:8081/users/64320746d5d2451496709f66
+DELETE http://localhost:8081/users/64374aca5d58c1c4b9823e1f
 
 ###
-POST http://localhost:8081/users/
+POST http://localhost:8081/users/register
 Content-Type: application/json
 
 {
-"name" : "Maria Tyson",
+"name" : "Thales Barbosa",
 "idade" : 34,
-"email" : "tyss@ig.com.br",
-"password" : "fefefe33",
+"email" : "thales@ig.com.br",
+"password" : "barbosa",
 "incremento" : "33"
 }
 
@@ -24,6 +24,25 @@ PATCH http://localhost:8081/users/6430d27d3a9cee54f27108dd
 Content-Type: application/json
 
 {
-"password" : "paranga44",
+"password" : "paranga433334",
 "incremento" : "222"
+}
+
+###
+
+POST http://localhost:8081/users/name
+Content-Type: application/json
+
+{
+"name" : "joaof"
+}
+
+###
+
+POST http://localhost:8081/users/login
+Content-Type: application/json
+
+{
+"email" : "thales@ig.com.br",
+"password" : "barbosa"
 }
