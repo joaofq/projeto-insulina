@@ -1,35 +1,37 @@
 import homeStyle from '../styles/Home.module.css';
 import Button from '@/components/Button/Button';
 import Layout from '@/components/Layout/Layout';
-
-function handleSubmit(event) {
-  event.preventDefault();
-  const email = event.target.elements.email.value;
-  const password = event.target.elements.password.value;
-  getUserInfo(email, password);
-}
-
-export async function getUserInfo(email, password) {
-  const data = await fetch('http://localhost:8081/users/login', {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
-  });
-
-  const usuario = await data.json();
-  console.log(usuario.email);
-  console.log(usuario.password);
-  console.log(usuario.name);
-  console.log(usuario.idade);
-}
+import { useState } from 'react';
 
 export default function Login() {
+  const [userData, setUserData] = useState('');
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const email = event.target.elements.email.value;
+    const password = event.target.elements.password.value;
+    getUserInfo(email, password);
+  }
+
+  async function getUserInfo(email, password) {
+    const data = await fetch('http://localhost:8081/users/login', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    let usuario = await data.json();
+    if (data.status != 200) {
+      return setUserData(usuario.message);
+    }
+    return setUserData(` Token: ${usuario.token}`);
+  }
+
   return (
     <Layout>
       <form className={homeStyle.container__form} onSubmit={handleSubmit}>
@@ -39,6 +41,7 @@ export default function Login() {
         <input type="password" name="password" />
         <Button title="Login" type="submit" />
       </form>
+      <h2>{userData}</h2>
     </Layout>
   );
 }

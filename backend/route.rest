@@ -5,22 +5,22 @@ GET http://localhost:8081/users
 GET http://localhost:8081/users/6430d27d3a9cee54f27108dd
 
 ###
-DELETE http://localhost:8081/users/64374aca5d58c1c4b9823e1f
+DELETE http://localhost:8081/users/6432132552e1ee9fbc8ccba5
 
 ###
 POST http://localhost:8081/users/register
 Content-Type: application/json
 
 {
-"name" : "Thales Barbosa",
+"name" : "Thales Pinto",
 "idade" : 34,
-"email" : "thales@ig.com.br",
-"password" : "barbosa",
+"email" : "pinto@ig.com.br",
+"password" : "pinto",
 "incremento" : "33"
 }
 
 ###
-PATCH http://localhost:8081/users/6430d27d3a9cee54f27108dd
+PATCH http://localhost:8081/users/643c829fde4fa95395758b6b
 Content-Type: application/json
 
 {
@@ -30,19 +30,10 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8081/users/name
-Content-Type: application/json
-
-{
-"name" : "joaof"
-}
-
-###
-
 POST http://localhost:8081/users/login
 Content-Type: application/json
 
 {
-"email" : "thales@ig.com.br",
-"password" : "barbosa"
+"email" : "pinto@ig.com.br",
+"password" : "pinto"
 }
