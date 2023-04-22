@@ -1,35 +1,18 @@
 import homeStyle from '../styles/Home.module.css';
 import Button from '@/components/Button/Button';
 import Layout from '@/components/Layout/Layout';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '@/contexts/UserContext';
 
 export default function Login() {
-  const [userData, setUserData] = useState('');
+  const { userLogin, data } = useContext(UserContext);
 
   function handleSubmit(event) {
     event.preventDefault();
     const email = event.target.elements.email.value;
     const password = event.target.elements.password.value;
-    getUserInfo(email, password);
-  }
-
-  async function getUserInfo(email, password) {
-    const data = await fetch('http://localhost:8081/users/login', {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
-    let usuario = await data.json();
-    if (data.status != 200) {
-      return setUserData(usuario.message);
-    }
-    return setUserData(` Token: ${usuario.token}`);
+    userLogin(email, password);
+    //Router.push('/dash');
   }
 
   return (
@@ -41,7 +24,7 @@ export default function Login() {
         <input type="password" name="password" />
         <Button title="Login" type="submit" />
       </form>
-      <h2>{userData}</h2>
+      <h2>{data && data.name}</h2>
     </Layout>
   );
 }

@@ -87,8 +87,13 @@ module.exports.login = async (req, res) => {
   if (!isMatch) {
     return res.status(401).json({ message: 'Invalid credentials' });
   }
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    expiresIn: '7d',
+  });
 
-  res.send(user);
+  //AJUSTAR POSTERIORMENTE https://www.youtube.com/watch?v=pvrKHpXGO8E ////////////////////////
+
+  res.json({ token: token, user });
 };
 
 module.exports.getUserById = async (req, res, next) => {
