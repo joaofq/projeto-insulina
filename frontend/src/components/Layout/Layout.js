@@ -20,11 +20,11 @@ export default function Layout({ children, home }) {
         <Link href={`/`}>
           <h1 className={styles.header__logo}>Projeto insulina</h1>
         </Link>
-        <navbar>
+        <nav>
           <ul className={styles.navbar}>
             <li className={styles.listItem}>
               {data ? (
-                data.email
+                <Link href={'/dash'}> {data.email} </Link>
               ) : (
                 <Link
                   className={
@@ -58,7 +58,7 @@ export default function Layout({ children, home }) {
               )}
             </li>
           </ul>
-        </navbar>
+        </nav>
       </header>
       <main>{children}</main>
       <footer className={styles.footer}>

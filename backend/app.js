@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 mongoose
   .connect(process.env.DATABASE_URL)
@@ -21,6 +22,13 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  allowHeaders: ['content-type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

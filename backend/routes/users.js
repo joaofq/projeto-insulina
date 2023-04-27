@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const {
+  verifyJWT,
   getAllUsers,
   getOneUser,
   createUser,
@@ -18,13 +19,15 @@ const {
 router.get('/', getAllUsers);
 
 //getting one
-router.get('/:id', getUserById, getOneUser);
+router.get('/me', verifyJWT, getUserById);
 
 //creating one
 router.post('/register', createUser);
 
+//ARRUMAR ROTAS UPDATE E DELETE, POIS MUDEI O GETUSERBYID.
+
 //updating one
-router.patch('/:id', getUserById, updateUser);
+router.patch('/me', verifyJWT, updateUser);
 
 router.delete('/:id', getUserById, deleteUser);
 

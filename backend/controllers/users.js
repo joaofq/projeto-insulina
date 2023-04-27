@@ -3,6 +3,34 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
+module.exports.verifyJWT = (req, res, next) => {
+  const token = req.headers['authorization']
+    ? req.headers['authorization'].replace('Bearer ', '')
+    : null;
+  let payload;
+  try {
+    payload = jwt.verify(token, process.env.JWT_SECRET);
+    req.userId = payload.userId;
+    next();
+  } catch (err) {
+    res.status(401).json({ message: err.message });
+  }
+};
+
+module.exports.getUserById = async (req, res) => {
+  let user;
+  try {
+    user = await User.findById(req.userId);
+    if (user == null) {
+      return res.status(404).json({ message: 'Cannot find user' });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+  res.json(user);
+};
+
+//SEM VerifyJWT:
 module.exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -12,9 +40,9 @@ module.exports.getAllUsers = async (req, res) => {
   }
 };
 
-module.exports.getOneUser = (req, res) => {
-  res.json(res.user);
-};
+// module.exports.getOneUser = (req, res) => {
+//   res.json(res.user);
+// };
 
 module.exports.createUser = async (req, res) => {
   let hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
@@ -91,22 +119,8 @@ module.exports.login = async (req, res) => {
     expiresIn: '7d',
   });
 
-  //AJUSTAR POSTERIORMENTE https://www.youtube.com/watch?v=pvrKHpXGO8E ////////////////////////
+  //ESTAMOS PASSANDO O USER DIRETO NO LOGIN. VAMOS TIRAR POSTERIORMENTE.
+  //  res.json({ token: token, user });
 
-  res.json({ token: token, user });
-};
-
-module.exports.getUserById = async (req, res, next) => {
-  let user;
-  try {
-    user = await User.findById(req.params.id);
-    if (user == null) {
-      return res.status(404).json({ message: 'Cannot find user' });
-    }
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-
-  res.user = user;
-  next();
+  res.json({ token: token });
 };

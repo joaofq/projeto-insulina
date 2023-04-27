@@ -3,16 +3,18 @@ import Button from '@/components/Button/Button';
 import Layout from '@/components/Layout/Layout';
 import { useContext } from 'react';
 import { UserContext } from '@/contexts/UserContext';
+import { useRouter } from 'next/router';
 
 export default function Login() {
   const { userLogin, data } = useContext(UserContext);
+  const router = useRouter();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const email = event.target.elements.email.value;
     const password = event.target.elements.password.value;
-    userLogin(email, password);
-    //Router.push('/dash');
+    await userLogin(email, password, router);
+    router.push('/dash');
   }
 
   return (
