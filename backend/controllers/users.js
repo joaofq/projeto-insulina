@@ -17,7 +17,7 @@ module.exports.verifyJWT = (req, res, next) => {
   }
 };
 
-module.exports.getUserById = async (req, res) => {
+module.exports.getUserById = async (req, res, next) => {
   let user;
   try {
     user = await User.findById(req.userId);
@@ -27,7 +27,8 @@ module.exports.getUserById = async (req, res) => {
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-  res.json(user);
+  res.user = user;
+  next();
 };
 
 //SEM VerifyJWT:
@@ -40,9 +41,9 @@ module.exports.getAllUsers = async (req, res) => {
   }
 };
 
-// module.exports.getOneUser = (req, res) => {
-//   res.json(res.user);
-// };
+module.exports.getOneUser = (req, res) => {
+  res.json(res.user);
+};
 
 module.exports.createUser = async (req, res) => {
   let hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
@@ -71,7 +72,7 @@ module.exports.updateUser = async (req, res) => {
   if (req.body.email != null) {
     res.user.email = req.body.email;
   }
-  if (req.body.password != null) {
+  if (req.body.password != undefined) {
     let hashedPassword = await bcrypt.hash(req.body.password, 10);
     res.user.password = hashedPassword;
   }

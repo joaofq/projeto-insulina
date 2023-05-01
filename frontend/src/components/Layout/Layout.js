@@ -39,12 +39,12 @@ export default function Layout({ children, home }) {
             <li className={styles.listItem}>
               {data ? (
                 <Link
-                  href={`/cadastro`}
+                  href={`/update`}
                   className={
-                    router.pathname == '/cadastro' ? styles.link__active : ''
+                    router.pathname == '/update' ? styles.link__active : ''
                   }
                 >
-                  Conta
+                  Configurações
                 </Link>
               ) : (
                 <Link

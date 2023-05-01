@@ -19,7 +19,7 @@ const {
 router.get('/', getAllUsers);
 
 //getting one
-router.get('/me', verifyJWT, getUserById);
+router.get('/me', verifyJWT, getUserById, getOneUser);
 
 //creating one
 router.post('/register', createUser);
@@ -27,7 +27,7 @@ router.post('/register', createUser);
 //ARRUMAR ROTAS UPDATE E DELETE, POIS MUDEI O GETUSERBYID.
 
 //updating one
-router.patch('/me', verifyJWT, updateUser);
+router.patch('/me', verifyJWT, getUserById, updateUser);
 
 router.delete('/:id', getUserById, deleteUser);
 
