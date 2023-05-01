@@ -23,8 +23,8 @@ export default function Layout({ children, home }) {
         <nav>
           <ul className={styles.navbar}>
             <li className={styles.listItem}>
-              {data ? (
-                <Link href={'/dash'}> {data.email} </Link>
+              {login ? (
+                <Link href={'/dash'}>dash </Link>
               ) : (
                 <Link
                   className={
@@ -37,7 +37,7 @@ export default function Layout({ children, home }) {
               )}
             </li>
             <li className={styles.listItem}>
-              {data ? (
+              {login ? (
                 <Link
                   href={`/update`}
                   className={

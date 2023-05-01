@@ -29,7 +29,7 @@ router.post('/register', createUser);
 //updating one
 router.patch('/me', verifyJWT, getUserById, updateUser);
 
-router.delete('/:id', getUserById, deleteUser);
+router.delete('/me', verifyJWT, getUserById, deleteUser);
 
 router.post('/login', login);
 

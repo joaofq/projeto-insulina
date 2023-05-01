@@ -6,8 +6,8 @@ import { useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { UserContext } from '@/contexts/UserContext';
 
-export default function Cadastro() {
-  const { data, setData } = useContext(UserContext);
+export default function Update() {
+  const { data, setData, logoff } = useContext(UserContext);
   const router = useRouter();
   const [userName, setUserName] = useState(data.name);
   const [idade, setIdade] = useState(data.idade);
@@ -28,13 +28,28 @@ export default function Cadastro() {
         password,
       );
       setData(userData);
+      router.push('/dash');
     } catch (error) {
-      console.log('Pau: ' + error);
+      console.log('Erro: ' + error);
+    }
+  }
+
+  async function handleDelete(e) {
+    e.preventDefault();
+    try {
+      await api.deleteUser();
+      logoff();
+      router.push('/');
+    } catch (error) {
+      console.log('Erro: ' + error);
     }
   }
 
   return (
     <Layout>
+      <button type="button" title="Deletar Conta" onClick={handleDelete}>
+        deletar
+      </button>
       <form className={homeStyle.container__form} onSubmit={handleSubmit}>
         <label>Nome</label>
         <input

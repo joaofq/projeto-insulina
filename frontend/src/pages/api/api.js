@@ -67,6 +67,15 @@ class Api {
     let res = await userDataRes.json();
     return res;
   }
+
+  async deleteUser() {
+    const userDeleted = await fetch(this._baseUrl + '/users/me', {
+      headers: this._headers,
+      method: 'DELETE',
+    });
+    let res = await userDeleted.json();
+    return res;
+  }
 }
 
 const api = new Api({
