@@ -32,31 +32,50 @@ export default function Cadastro() {
     }
   }
 
+  async function handleUpdate(e) {
+    e.preventDefault();
+    try {
+      const userData = await api.updateUser(
+        userName,
+        idade,
+        incremento,
+        email,
+        password,
+      );
+      // userLogin(email, password);
+    } catch (error) {
+      console.log('Pau: ' + error);
+    }
+  }
+
   return (
     <Layout>
-      <form className={homeStyle.container__form} onSubmit={handleSubmit}>
+      <form
+        className={homeStyle.container__form}
+        onSubmit={data ? handleUpdate : handleSubmit}
+      >
         <label>Nome</label>
         <input
           type="text"
-          value={userName}
+          value={data ? data.name : userName}
           onChange={(e) => setUserName(e.target.value)}
         />
         <label>Idade</label>
         <input
           type="number"
-          value={idade}
+          value={data ? data.idade : idade}
           onChange={(e) => setIdade(e.target.value)}
         />
         <label>Incremento insulina</label>
         <input
           type="number"
-          value={incremento}
+          value={data ? data.incremento : incremento}
           onChange={(e) => setIncremento(e.target.value)}
         />
         <label>E-mail</label>
         <input
           type="email"
-          value={email}
+          value={data ? data.email : email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <label>Password</label>
@@ -65,7 +84,7 @@ export default function Cadastro() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button title="Cadastrar" type="submit" />
+        <Button title={data ? 'Atualizar' : 'Cadastrar'} type="submit" />
       </form>
     </Layout>
   );

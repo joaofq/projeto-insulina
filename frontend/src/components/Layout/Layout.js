@@ -7,7 +7,7 @@ import { useContext } from 'react';
 
 export default function Layout({ children, home }) {
   const router = useRouter();
-  const { data } = useContext(UserContext);
+  const { data, login, logoff } = useContext(UserContext);
 
   return (
     <>
@@ -39,9 +39,9 @@ export default function Layout({ children, home }) {
             <li className={styles.listItem}>
               {data ? (
                 <Link
-                  href={`/conta`}
+                  href={`/cadastro`}
                   className={
-                    router.pathname == '/conta' ? styles.link__active : ''
+                    router.pathname == '/cadastro' ? styles.link__active : ''
                   }
                 >
                   Conta
@@ -57,6 +57,13 @@ export default function Layout({ children, home }) {
                 </Link>
               )}
             </li>
+            {login && (
+              <li className={styles.listItem}>
+                <Link href={`/`} onClick={logoff}>
+                  Logoff
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </header>

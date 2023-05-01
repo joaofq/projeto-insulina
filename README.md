@@ -46,13 +46,12 @@ Front:
 
 - API com backend
 - Página exibição de dados
-- Inputs
 - Design geral
 - Validação do formulário
 
 Backend:
 
-- Validações
-- JWToken
-- Bcrypt
+- info´s no cadastro.
+- Update info
+- Tratamento de erros nas req api
 - Proteção

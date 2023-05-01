@@ -8,7 +8,7 @@ x-acces-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDNjODM5NmQ2
 
 
 ###
-DELETE http://localhost:8081/users/6432132552e1ee9fbc8ccba5
+DELETE http://localhost:8081/users/644dbe21aa8d530ae56ad0c0
 
 ###
 POST http://localhost:8081/users/register

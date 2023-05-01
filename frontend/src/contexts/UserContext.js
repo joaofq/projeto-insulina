@@ -1,48 +1,48 @@
 import { createContext, useState, useEffect, use } from 'react';
 import api from '../pages/api/api';
+import { useRouter } from 'next/router';
 
 export const UserContext = createContext();
-// console.log(localStorage.getItem('token'));
 
 export const UserStorage = ({ children }) => {
   const [data, setData] = useState(null);
   const [login, setLogin] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
 
     if (token) {
+      setLogin(true);
       api.setToken(token);
       api.getUserInfo().then((userData) => setData(userData));
     } else {
       console.log('Usuário não registrado!');
     }
-  });
+  }, []);
 
   async function userLogin(email, password) {
-    const reqToken = await fetch('http://localhost:8081/users/login', {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
-    let data = await reqToken.json();
+    try {
+      await api.authenticate(email, password);
+      setLogin(true);
+      const userData = await api.getUserInfo();
+      setData(userData);
+      if (userData) {
+        router.push('/dash');
+      }
+    } catch (error) {
+      console.log('Erro de autenticação: ' + error);
+    }
+  }
 
-    window.localStorage.setItem('token', data.token);
-    setLogin(true);
-    api.setToken(data.token);
-    setData(api.getUserInfo());
+  function logoff() {
+    setLogin(false);
+    setData(false);
+    window.localStorage.removeItem('token');
   }
 
   return (
-    <UserContext.Provider value={{ userLogin, data }}>
+    <UserContext.Provider value={{ userLogin, data, login, logoff }}>
       {children}
     </UserContext.Provider>
   );
