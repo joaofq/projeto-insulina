@@ -13,7 +13,7 @@ export default function Cadastro() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { userLogin, data } = useContext(UserContext);
+  const { setLogin, setData } = useContext(UserContext);
   const router = useRouter();
 
   async function handleSubmit(e) {
@@ -26,7 +26,17 @@ export default function Cadastro() {
         email,
         password,
       );
-      userLogin(email, password);
+      try {
+        await api.authenticate(email, password);
+        setLogin(true);
+        const userData = await api.getUserInfo();
+        setData(userData);
+        if (userData) {
+          router.push('/dash');
+        }
+      } catch (error) {
+        console.log('Erro de autenticação: ' + error);
+      }
     } catch (error) {
       console.log('Pau: ' + error);
     }

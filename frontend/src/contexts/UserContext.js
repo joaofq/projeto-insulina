@@ -21,20 +21,6 @@ export const UserStorage = ({ children }) => {
     }
   }, []);
 
-  async function userLogin(email, password) {
-    try {
-      await api.authenticate(email, password);
-      setLogin(true);
-      const userData = await api.getUserInfo();
-      setData(userData);
-      if (userData) {
-        router.push('/dash');
-      }
-    } catch (error) {
-      console.log('Erro de autenticação: ' + error);
-    }
-  }
-
   function logoff() {
     setLogin(false);
     setData(false);
@@ -43,7 +29,7 @@ export const UserStorage = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ userLogin, data, setData, login, setLogin, setLogin, logoff }}
+      value={{ data, setData, login, setLogin, setLogin, logoff }}
     >
       {children}
     </UserContext.Provider>
