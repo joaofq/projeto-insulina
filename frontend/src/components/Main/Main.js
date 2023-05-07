@@ -1,3 +1,5 @@
-export default function Main() {
-  return <main>Main</main>;
+import styles from './main.module.css';
+
+export default function Main({ children }) {
+  return <main className={styles.main__container}>{children}</main>;
 }

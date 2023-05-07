@@ -1,0 +1,21 @@
+.calc {
+}
+
+.calc__title {
+}
+
+.calc__form {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calc__input {
+  width: 100px;
+  height: 30px;
+}
+
+.calc__result {
+  margin-top: 20px;
+}

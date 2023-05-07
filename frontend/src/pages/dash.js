@@ -1,4 +1,8 @@
+import Calc from '@/components/Calc/Calc';
+import Historico from '@/components/Historico/Historico';
 import Layout from '@/components/Layout/Layout';
+import Main from '@/components/Main/Main';
+import UserCard from '@/components/UserCard/UserCard';
 import { UserContext } from '@/contexts/UserContext';
 import { useContext } from 'react';
 
@@ -8,12 +12,11 @@ export default function dash() {
 
   return (
     <Layout>
-      <h1> Exibição de infos</h1>
-      <ul>
-        <li>Nome: {data.name}</li>
-        <li>Idade: {data.idade}</li>
-        <li>Incremento: {data.incremento}</li>
-      </ul>
+      <Main>
+        <UserCard user={data} />
+        <Calc user={data} />
+        <Historico />
+      </Main>
     </Layout>
   );
 }
