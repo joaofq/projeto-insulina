@@ -5,6 +5,7 @@ export default function Historico(props) {
   return (
     <section className={homeStyle.card}>
       <h1> HISTÓRICO</h1>
+      <p>{props.user.historico}</p>
     </section>
   );
 }

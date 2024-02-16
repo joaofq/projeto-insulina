@@ -15,7 +15,7 @@ export default function dash() {
       <Main>
         <UserCard user={data} />
         <Calc user={data} />
-        <Historico />
+        <Historico user={data} />
       </Main>
     </Layout>
   );

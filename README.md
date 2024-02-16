@@ -2,15 +2,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, run the development server on frontend:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+
+Then  run the backend:
+
+$ node app.js
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -42,6 +41,8 @@ https://color.adobe.com/pt/search?q=health%20app
 
 Melhorias:
 
+- Adicionar o historico ao medir glicemia.
+
 Front:
 
 - API com backend
@@ -55,3 +56,4 @@ Backend:
 - Update info
 - Tratamento de erros nas req api
 - Proteção
+```

@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const historicoSchema = new mongoose.Schema({
+  glicemia: {
+    type: Number,
+    required: true,
+  },
+  dataMedicao: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -31,6 +42,7 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  historico: [historicoSchema], // Adicionando o campo de histórico ao esquema do usuário
 });
 
 module.exports = mongoose.model('User', userSchema);
